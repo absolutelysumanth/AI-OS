@@ -1,0 +1,28 @@
+/* styles.css */
+
+body.bg-grey {
+    background-color: #353434;
+}
+
+.login-container {
+    background-color: #fff9c4; /* light yellow */
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    color: #333;
+}
+
+input.form-control {
+    height: 45px;
+}
+
+button.btn-primary {
+    background-color: #f9a825;
+    border: none;
+}
+
+button.btn-primary:hover {
+    background-color: #f57f17;
+}

@@ -1,0 +1,397 @@
+/* General Styles */
+body.bg-grey {
+    background-color: #424242;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ /* Apply Montserrat Font to Entire Project */
+ body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Desktop Container */
+.desktop-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Desktop Icons */
+.icons {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.icon-item {
+    margin-bottom: 30px;
+    color: #f0f0f0;
+    font-size: 14px;
+}
+
+.desktop-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.desktop-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Taskbar Styles */
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #2c3e50;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px -2px 15px rgba(0, 0, 0, 0.5);
+}
+
+.taskbar:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    background-color: #2c3e50;
+}
+
+/* Start Menu Styles */
+.start-menu {
+    position: absolute;
+    bottom: 60px; /* Position it above the Start Button */
+    left: 10px;
+    width: 250px; /* Increased width */
+    background-color: #34495e; /* Darker background for the menu */
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+    display: none; /* Initially hidden */
+    z-index: 1000;
+    padding: 15px 0;
+    list-style: none;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.start-menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.start-menu li {
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between icon and text */
+    transition: background-color 0.3s, padding-left 0.3s;
+    border-radius: 8px;
+}
+
+.start-menu li:hover {
+    background-color: #2c3e50;
+    padding-left: 30px; /* Add padding for a smooth effect */
+}
+
+.start-menu li:hover i {
+    transform: scale(1.1);
+    color: #f39c12;
+}
+
+.start-menu li i {
+    font-size: 18px; /* Icon size */
+}
+
+/* Add a slide-in effect for the menu */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hide the start menu when clicked outside */
+.start-menu.open {
+    display: block; /* Make the menu visible */
+}
+
+/* Start Button Styles */
+.start-button {
+    width: 120px; /* Adjusted button size */
+    height: 45px; /* Adjusted button height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #3498db, #8e44ad); /* Gradient background */
+    color: white;
+    font-size: 14px; /* Adjusted font size */
+    font-weight: bold;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.start-button:hover {
+    background: linear-gradient(135deg, #2980b9, #9b59b6); /* Darker gradient on hover */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3); /* Added glow */
+}
+
+.start-button:active {
+    background: linear-gradient(135deg, #1c5985, #6a1b9a); /* Darker gradient on click */
+    transform: scale(1);
+}
+
+.start-button .start-icon {
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.start-button .start-text {
+    font-size: 14px;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+    .desktop-container {
+        flex-direction: column;
+        padding: 10px; /* Added padding to prevent items touching the edges */
+    }
+
+    .icons {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .icon-item {
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    .desktop-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .taskbar {
+        height: 60px; /* Increased height for mobile taskbar */
+    }
+}
+
+/* Fake Terminal Styles */
+.fake-terminal {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    width: 400px;
+    height: 300px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    overflow: hidden;
+}
+
+.terminal-header {
+    background-color: #333;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #555;
+    color: #ccc;
+}
+
+.terminal-body {
+    padding: 15px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Terminal text colors */
+.text-green {
+    color: #00ff00;
+}
+
+.text-grey {
+    color: #cccccc;
+}
+
+.text-red {
+    color: #ff5555;
+}
+
+.terminal-line {
+    display: flex;
+    align-items: center;
+}
+
+.terminal-input {
+    background: none;
+    border: none;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    caret-color: #00ff00;
+}
+
+/* Modal Content */
+.modal-content {
+    background: rgba(0, 0, 0, 0.35) !important; /* A bit darker background for better contrast */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(8px) !important; /* Slight blur effect */
+    -webkit-backdrop-filter: blur(8px) !important;
+    box-shadow: 0 8px 50px rgba(0, 0, 0, 0.6) !important; /* Deeper shadow for focus */
+    color: #fff !important; /* Light text for dark theme */
+    border-radius: 12px; /* Round the corners of the modal */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Modal Header */
+.modal-header {
+    background: rgba(0, 0, 0, 0.5) !important; /* Darker header */
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Light border for separation */
+    border-radius: 12px 12px 0 0; /* Rounded corners at the top */
+}
+
+.modal-header h5 {
+    margin: 0;
+}
+
+/* Window Controls */
+.window-controls {
+    display: flex;
+    align-items: center;
+}
+
+.window-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    margin-left: 8px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+    font-size: 14px;
+}
+
+/* Window Control Button Colors */
+.window-minimize {
+    background: linear-gradient(145deg, #f1c40f, #f39c12); /* Gradient for Minimize */
+    box-shadow: 0 0 5px rgba(241, 196, 15, 0.5);
+}
+
+.window-maximize {
+    background: linear-gradient(145deg, #2ecc71, #27ae60); /* Gradient for Maximize */
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+}
+
+.window-close {
+    background: linear-gradient(145deg, #e74c3c, #c0392b); /* Gradient for Close */
+    box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+}
+
+.window-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.1); /* Slightly grow on hover */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.1); /* Glow effect */
+}
+
+.window-btn:active {
+    transform: scale(0.95); /* Shrink slightly when clicked */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); /* More intense shadow when clicked */
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.modal-body .small {
+    word-break: break-word;
+    font-size: 0.85rem;
+    color: #ddd;
+}
+
+/* File Item Styling */
+.col-md-3 {
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.small {
+    margin-top: 8px;
+    color: #ddd;
+    font-size: 14px;
+}
+
+/* Default modal size (smaller size) */
+.modal-dialog {
+    max-width: 80%; /* Adjust the width as needed */
+    /* margin: 5% auto; */ /* Center the modal */
+}
+
+.modal-lg-custom {
+    width: 100% !important; /* Maximize to full width */
+    height: 100vh !important; /* Full screen height */
+    max-width: none !important;
+    margin: 0; /* Remove any margin */
+}
+
+
+/* Hover animation for AI LINKS cards */
+.ai-link-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ai-link-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2);
+    cursor: pointer;
+}
