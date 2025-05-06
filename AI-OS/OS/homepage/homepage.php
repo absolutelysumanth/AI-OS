@@ -38,6 +38,11 @@
             <img src="https://img.icons8.com/fluency/48/artificial-intelligence.png" class="desktop-icon" alt="AI Folders">
                 <p>AI LINKS</p>
             </div>
+            <div class="icon-item text-center" onclick="openApp('Notes')">
+                <img src="https://img.icons8.com/fluency/48/note.png" class="desktop-icon" alt="Notes">
+                <p>Notes</p>
+            </div>
+
         </div>
 
 
@@ -241,6 +246,55 @@
         </div>
     </div>
 </div>
+
+
+<!-- Notes Modal -->
+<div class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="notesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" id="notesModalDialog">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="notesModalLabel">
+                    <i class="fas fa-sticky-note me-2 text-primary"></i>Notes
+                </h5>
+                <div class="window-controls">
+                    <button class="window-btn window-minimize" title="Minimize">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="window-btn window-maximize" title="Maximize" id="maximizeNotesBtn">
+                        <i class="fas fa-square"></i>
+                    </button>
+                    <button class="window-btn window-close" title="Close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+    <!-- Notepad List -->
+    <div class="mb-3">
+        <ul id="notepadList" class="list-group">
+            <!-- List items will be inserted here -->
+        </ul>
+    </div>
+
+    <!-- Notes Content Area -->
+    <div class="mb-3">
+        <textarea id="notepadArea" class="form-control bg-dark text-white border-0" rows="20" placeholder="Write your notes here..."></textarea>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-success me-2" onclick="saveNote()">
+            <i class="fas fa-save me-1"></i> Save
+        </button>
+        <button class="btn btn-secondary" onclick="clearNote()">
+            <i class="fas fa-eraser me-1"></i> Clear
+        </button>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
 
 
 
