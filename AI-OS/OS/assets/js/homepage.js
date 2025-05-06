@@ -85,22 +85,29 @@ function loadNotepadList() {
         .catch(error => console.error('Error loading notepads:', error));
 }
 
-// Function to load the content of a selected notepad
+// Function to load the content of a selected notepad using AJAX (jQuery)
 function loadNotepadContent(notepadName) {
-    fetch(`http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/readNotepad.php?save_name=${notepadName}`)
-        .then(response => response.json())
-        .then(data => {
+    $.ajax({
+        url: `http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/readNotepad.php`,
+        type: 'GET',
+        data: { save_name: notepadName }, // Sending the notepad name as a query parameter
+        dataType: 'json',
+        success: function(data) {
             if (data.notes) {
                 // Load the content of the notepad into the textarea
-                document.getElementById('notepadArea').value = data.notes;
+                $('#notepadArea').val(data.notes);
                 // Optionally, you can also store the current notepad in localStorage
                 localStorage.setItem('currentNotepad', notepadName);
             } else {
                 alert('No content found for this notepad');
             }
-        })
-        .catch(error => console.error('Error loading notepad content:', error));
+        },
+        error: function(xhr, status, error) {
+            console.error('Error loading notepad content:', error);
+        }
+    });
 }
+
 
 // Function to save note to local storage and server
 function saveNote() {
