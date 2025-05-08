@@ -268,28 +268,30 @@
                     </button>
                 </div>
             </div>
+
+            <!-- NOTEPAD -->
             <div class="modal-body">
-    <!-- Notepad List -->
-    <div class="mb-3">
-        <ul id="notepadList" class="list-group">
-            <!-- List items will be inserted here -->
-        </ul>
-    </div>
+                <!-- Notepad List -->
+                <div class="mb-3">
+                    <ul id="notepadList" class="list-group">
+                        <!-- List items will be inserted here -->
+                    </ul>
+                </div>
 
-    <!-- Notes Content Area -->
-    <div class="mb-3">
-        <textarea id="notepadArea" class="form-control bg-dark text-white border-0" rows="20" placeholder="Write your notes here..."></textarea>
-    </div>
+                <!-- Notes Content Area -->
+                <div class="mb-3">
+                    <textarea id="notepadArea" class="form-control bg-dark text-white border-0" rows="20" placeholder="Write your notes here..."></textarea>
+                </div>
 
-    <div class="d-flex justify-content-end">
-        <button class="btn btn-success me-2" onclick="saveNote()">
-            <i class="fas fa-save me-1"></i> Save
-        </button>
-        <button class="btn btn-secondary" onclick="clearNote()">
-            <i class="fas fa-eraser me-1"></i> Clear
-        </button>
-    </div>
-</div>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-success me-2" onclick="saveNote()">
+                        <i class="fas fa-save me-1"></i> Save
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearNote()">
+                        <i class="fas fa-eraser me-1"></i> Clear
+                    </button>
+                </div>
+            </div>
 
         </div>
     </div>
