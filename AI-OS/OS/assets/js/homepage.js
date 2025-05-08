@@ -40,126 +40,32 @@ function openApp(appName) {
     }
 }
 
-// Function to toggle modal maximization
 function toggleModalMaximization(modalId, buttonId) {
     const modalDialog = document.getElementById(modalId);
     const maximizeButton = document.getElementById(buttonId);
-    
-    maximizeButton.addEventListener('click', function () {
-        modalDialog.classList.toggle('modal-lg-custom'); // Toggle maximized class
-        
-        // Change maximize icon to restore icon when maximized
-        const icon = this.querySelector('i');
-        if (modalDialog.classList.contains('modal-lg-custom')) {
-            icon.classList.remove('fa-square');
-            icon.classList.add('fa-window-restore');
-        } else {
-            icon.classList.remove('fa-window-restore');
-            icon.classList.add('fa-square');
-        }
-    });
 
-    
-}
+    if (modalDialog && maximizeButton) {
+        maximizeButton.addEventListener('click', function () {
+            // Toggle the maximized state for the modal dialog
+            modalDialog.classList.toggle('modal-lg-custom'); // Add or remove custom class for maximization
 
-// Function to load the list of notepads from the server (API)
-function loadNotepadList() {
-    fetch('http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/getNotepadList.php')
-        .then(response => response.json())
-        .then(data => {
-            const notepadList = document.getElementById('notepadList');
-            notepadList.innerHTML = ''; // Clear existing list items
-
-            if (Array.isArray(data) && data.length > 0) {
-                data.forEach(notepad => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'list-group-item';
-                    listItem.textContent = notepad;
-                    listItem.onclick = () => loadNotepadContent(notepad); // Attach click handler
-                    notepadList.appendChild(listItem);
-                });
+            // Change the icon based on the state
+            const icon = this.querySelector('i');
+            if (modalDialog.classList.contains('modal-lg-custom')) {
+                icon.classList.remove('fa-square');
+                icon.classList.add('fa-window-restore');
             } else {
-                notepadList.innerHTML = '<li class="list-group-item">No notepads found</li>';
+                icon.classList.remove('fa-window-restore');
+                icon.classList.add('fa-square');
             }
-        })
-        .catch(error => console.error('Error loading notepads:', error));
-}
-
-// Function to load the content of a selected notepad using AJAX (jQuery)
-function loadNotepadContent(notepadName) {
-    $.ajax({
-        url: `http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/readNotepad.php`,
-        type: 'GET',
-        data: { save_name: notepadName }, // Sending the notepad name as a query parameter
-        dataType: 'json',
-        success: function(data) {
-            if (data.notes) {
-                // Load the content of the notepad into the textarea
-                $('#notepadArea').val(data.notes);
-                // Optionally, you can also store the current notepad in localStorage
-                localStorage.setItem('currentNotepad', notepadName);
-            } else {
-                alert('No content found for this notepad');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error loading notepad content:', error);
-        }
-    });
-}
-
-
-// Function to save note to local storage and server
-function saveNote() {
-    const note = document.getElementById('notepadArea').value;
-
-    // Save to local storage
-    localStorage.setItem('userNote', note);
-
-    // Save to server (you can create an API to handle saving notes to the database)
-    const saveName = localStorage.getItem('currentNotepad') || 'default.txt';  // Use current notepad name or default name
-    const data = {
-        save_name: saveName,
-        notes: note
-    };
-
-    fetch('http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/saveNotepad.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Note saved!');
-        } else {
-            alert('Error saving note');
-        }
-    })
-    .catch(error => console.error('Error saving note:', error));
-}
-
-// Function to clear the note in the textarea and local storage
-function clearNote() {
-    if (confirm('Clear all notes?')) {
-        document.getElementById('notepadArea').value = '';
-        localStorage.removeItem('userNote');
-        localStorage.removeItem('currentNotepad');
+        });
+    } else {
+        console.error(`Modal or Button with IDs ${modalId} or ${buttonId} not found.`);
     }
 }
 
-// Load saved note when modal is opened
-document.addEventListener('DOMContentLoaded', function () {
-    const savedNote = localStorage.getItem('userNote');
-    if (savedNote) {
-        document.getElementById('notepadArea').value = savedNote;
-    }
-    
-    // Load the list of notepads on modal open
-    loadNotepadList();
-});
+
+
 
 
 // Call the function for AI Folders Modal
@@ -217,3 +123,87 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+// notepad functionality start
+
+// Load notepad list on page load
+window.onload = function () {
+    generateNotepadList();
+};
+
+// Fetch list of notepads
+function generateNotepadList() {
+    $.ajax({
+        url: '/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/getNotepadList.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            const notepadList = $('#notepadList');
+            notepadList.empty();
+
+            if (Array.isArray(data)) {
+                data.forEach(saveName => {
+                    const listItem = $('<li>')
+                        .addClass('list-group-item notepad-item mb-2 rounded')
+                        .text(saveName)
+                        .click(() => openNotepad(saveName));
+
+                    notepadList.append(listItem);
+                });
+            } else {
+                notepadList.append('<li class="text-muted">No notepads found.</li>');
+            }
+        },
+        error: function () {
+            alert('Failed to load notepads.');
+        }
+    });
+}
+
+function openNotepad(saveName) {
+    $.ajax({
+        url: '/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/readNotepad.php',
+        method: 'GET',
+        data: { save_name: saveName },
+        dataType: 'json',
+        success: function (data) {
+            if (data.message) {
+                alert(data.message);
+            } else {
+                $('#notepadTitle').text(data.save_name);
+                $('#notepadContent').val(data.notes); // <-- Updated from data.content to data.notes
+                $('#notepadModal').modal('show');
+            }
+        },
+        error: function () {
+            alert('Error loading note.');
+        }
+    });
+}
+
+
+// Save note (POST to your PHP endpoint)
+function saveNote() {
+    const saveName = $('#notepadTitle').text();
+    const content = $('#notepadContent').val();
+
+    $.ajax({
+        url: '/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/saveNotepad.php', // Adjust path
+        method: 'POST',
+        data: { save_name: saveName, content: content },
+        success: function () {
+            alert('Note saved!');
+        },
+        error: function () {
+            alert('Save failed.');
+        }
+    });
+}
+
+// Clear the note content
+function clearNote() {
+    $('#notepadContent').val('');
+}
+
+
+// notepad functionality end

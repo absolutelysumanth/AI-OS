@@ -248,7 +248,7 @@
 </div>
 
 
-<!-- Notes Modal -->
+<!-- Notes List Modal -->
 <div class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="notesModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" id="notesModalDialog">
         <div class="modal-content">
@@ -269,22 +269,48 @@
                 </div>
             </div>
 
-            <!-- NOTEPAD -->
-            <div class="modal-body">
-                <!-- Notepad List -->
-                <div class="mb-3">
-                    <ul id="notepadList" class="list-group">
-                        <!-- List items will be inserted here -->
+            <!-- NOTEPAD LIST -->
+            <div class="modal-body bg-dark text-white rounded p-3">
+                <div class="mb-4">
+                    <h5 class="mb-3">📝 Your Notepads</h5>
+                    <ul id="notepadList" class="list-group list-group-flush">
+                        <!-- List items populated by JS -->
                     </ul>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <!-- Notes Content Area -->
+<!-- Notepad Viewer Modal -->
+<div class="modal fade" id="notepadModal" tabindex="-1" aria-labelledby="notepadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="notepadModalLabel">
+                    <i class="fas fa-sticky-note me-2 text-primary"></i><span id="notepadTitle">Notepad</span>
+                </h5>
+                <div class="window-controls">
+                    <button class="window-btn window-minimize" title="Minimize">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="window-btn window-maximize" title="Maximize" id="maximizeNotepadBtn">
+                        <i class="fas fa-square"></i>
+                    </button>
+                    <button class="window-btn window-close" title="Close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-body bg-dark text-white rounded p-3">
                 <div class="mb-3">
-                    <textarea id="notepadArea" class="form-control bg-dark text-white border-0" rows="20" placeholder="Write your notes here..."></textarea>
+                    <textarea id="notepadContent" class="form-control bg-dark text-white border-secondary" rows="15"></textarea>
                 </div>
 
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-success me-2" onclick="saveNote()">
+                <!-- Buttons -->
+                <div class="d-flex justify-content-end gap-2">
+                    <button class="btn btn-success" onclick="saveNote()">
                         <i class="fas fa-save me-1"></i> Save
                     </button>
                     <button class="btn btn-secondary" onclick="clearNote()">
@@ -292,10 +318,14 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 

@@ -1,25 +1,49 @@
 /* General Styles */
+:root {
+    --body-bg: #424242; /* Background for body */
+    --font-family: 'Montserrat', sans-serif; /* Font for entire site */
+    --primary-color: #f0f0f0; /* Text color for icons */
+    --secondary-color: #f8f9fa; /* Button outline color */
+    --notepad-bg: #343a40; /* Notepad Background */
+    --notepad-hover-bg: #3a3a3a; /* Notepad Hover Background */
+    --notepad-text: #ffffff; /* Notepad Text Color */
+    --taskbar-bg: #2c3e50; /* Taskbar background */
+    --start-menu-bg: #34495e; /* Start menu background */
+    --start-button-gradient: linear-gradient(135deg, #3498db, #8e44ad); /* Gradient for start button */
+    --start-button-hover-gradient: linear-gradient(135deg, #2980b9, #9b59b6); /* Start button hover gradient */
+    --modal-bg: rgba(0, 0, 0, 0.35); /* Modal background */
+    --button-hover-glow: rgba(0, 0, 0, 0.3); /* Button hover glow */
+    --btn-border-color: #f8f9fa; /* Button border color */
+    --btn-hover-bg: #f8f9fa; /* Button hover background */
+    --file-item-text-color: #ddd; /* File item text color */
+    --terminal-bg: #1e1e1e; /* Terminal background */
+    --terminal-text: #00ff00; /* Terminal text color */
+    --terminal-header-bg: #333; /* Terminal header background */
+    --terminal-input-bg: #1e1e1e; /* Terminal input background */
+    --terminal-placeholder: #555; /* Placeholder text color */
+    --terminal-border: #444; /* Border color */
+    --terminal-scrollbar-thumb: #444; /* Scrollbar thumb color */
+    --terminal-scrollbar-thumb-hover: #555; /* Scrollbar thumb hover color */
+}
+
+/* General Styles */
 body.bg-grey {
-    background-color: #424242;
+    background-color: var(--body-bg);
     height: 100vh;
     overflow: hidden;
     margin: 0;
     padding: 0;
     position: relative;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-family);
 }
 
- /* Apply Montserrat Font to Entire Project */
- body {
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* Desktop Container */
+/* Parent container */
 .desktop-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
+
 
 /* Desktop Icons */
 .icons {
@@ -30,7 +54,7 @@ body.bg-grey {
 
 .icon-item {
     margin-bottom: 30px;
-    color: #f0f0f0;
+    color: var(--primary-color);
     font-size: 14px;
 }
 
@@ -51,7 +75,7 @@ body.bg-grey {
     bottom: 0;
     width: 100%;
     height: 50px;
-    background-color: #2c3e50;
+    background-color: var(--taskbar-bg);
     padding: 0 10px;
     display: flex;
     align-items: center;
@@ -61,20 +85,20 @@ body.bg-grey {
 
 .taskbar:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    background-color: #2c3e50;
+    background-color: var(--taskbar-bg);
 }
 
 /* Start Menu Styles */
 .start-menu {
     position: absolute;
-    bottom: 60px; /* Position it above the Start Button */
+    bottom: 60px;
     left: 10px;
-    width: 250px; /* Increased width */
-    background-color: #34495e; /* Darker background for the menu */
-    color: white;
+    width: 250px;
+    background-color: var(--start-menu-bg);
+    color: var(--primary-color);
     border-radius: 10px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
-    display: none; /* Initially hidden */
+    display: none;
     z-index: 1000;
     padding: 15px 0;
     list-style: none;
@@ -92,14 +116,14 @@ body.bg-grey {
     font-size: 16px;
     display: flex;
     align-items: center;
-    gap: 15px; /* Space between icon and text */
+    gap: 15px;
     transition: background-color 0.3s, padding-left 0.3s;
     border-radius: 8px;
 }
 
 .start-menu li:hover {
-    background-color: #2c3e50;
-    padding-left: 30px; /* Add padding for a smooth effect */
+    background-color: var(--taskbar-bg);
+    padding-left: 30px;
 }
 
 .start-menu li:hover i {
@@ -108,7 +132,7 @@ body.bg-grey {
 }
 
 .start-menu li i {
-    font-size: 18px; /* Icon size */
+    font-size: 18px;
 }
 
 /* Add a slide-in effect for the menu */
@@ -125,19 +149,19 @@ body.bg-grey {
 
 /* Hide the start menu when clicked outside */
 .start-menu.open {
-    display: block; /* Make the menu visible */
+    display: block;
 }
 
 /* Start Button Styles */
 .start-button {
-    width: 120px; /* Adjusted button size */
-    height: 45px; /* Adjusted button height */
+    width: 120px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #3498db, #8e44ad); /* Gradient background */
-    color: white;
-    font-size: 14px; /* Adjusted font size */
+    background: var(--start-button-gradient);
+    color: var(--primary-color);
+    font-size: 14px;
     font-weight: bold;
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -150,13 +174,13 @@ body.bg-grey {
 }
 
 .start-button:hover {
-    background: linear-gradient(135deg, #2980b9, #9b59b6); /* Darker gradient on hover */
+    background: var(--start-button-hover-gradient);
     transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3); /* Added glow */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .start-button:active {
-    background: linear-gradient(135deg, #1c5985, #6a1b9a); /* Darker gradient on click */
+    background: var(--start-button-hover-gradient);
     transform: scale(1);
 }
 
@@ -169,190 +193,113 @@ body.bg-grey {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-.start-button .start-text {
-    font-size: 14px;
-}
-
-/* Media Queries for Mobile Responsiveness */
-@media (max-width: 768px) {
-    .desktop-container {
-        flex-direction: column;
-        padding: 10px; /* Added padding to prevent items touching the edges */
-    }
-
-    .icons {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .icon-item {
-        margin-right: 20px;
-        margin-bottom: 20px;
-    }
-
-    .desktop-icon {
-        width: 48px;
-        height: 48px;
-    }
-
-    .taskbar {
-        height: 60px; /* Increased height for mobile taskbar */
-    }
-}
-
-/* Fake Terminal Styles */
+/* Terminal Container */
 .fake-terminal {
     position: absolute;
-    top: 50px;
-    right: 20px;
-    width: 400px;
-    height: 300px;
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background-color: var(--terminal-bg);
+    color: var(--terminal-text);
+    border-radius: 10px;
+    width: 500px; /* Increased width */
+    height: 300px; /* Increased height */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
-.terminal-header {
-    background-color: #333;
-    padding: 10px;
-    font-weight: bold;
-    border-bottom: 1px solid #555;
-    color: #ccc;
-}
-
+/* Terminal Body */
 .terminal-body {
     padding: 15px;
-    flex: 1;
+    height: 230px; /* Increased height of terminal body */
     overflow-y: auto;
 }
 
-/* Terminal text colors */
-.text-green {
-    color: #00ff00;
+/* Terminal Header */
+.terminal-header {
+    background-color: var(--terminal-header-bg);
+    color: #fff;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 16px; /* Increased font size */
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
-.text-grey {
-    color: #cccccc;
+
+/* Terminal Prompt */
+.terminal-prompt {
+    display: inline-block;
+    color: #8a8a8a;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
-.text-red {
-    color: #ff5555;
-}
-
-.terminal-line {
-    display: flex;
-    align-items: center;
-}
-
+/* Terminal Input */
 .terminal-input {
-    background: none;
+    background-color: var(--terminal-input-bg);
     border: none;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
+    color: var(--terminal-text);
     outline: none;
     width: 100%;
-    caret-color: #00ff00;
+    padding: 8px;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 5px;
 }
+
+/* Terminal Output */
+.terminal-output {
+    color: var(--terminal-text);
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Terminal Command Echoed */
+.terminal-command {
+    color: #f1fa8c;
+    font-weight: normal;
+}
+
+/* Placeholder text */
+.terminal-input::placeholder {
+    color: var(--terminal-placeholder);
+}
+
+/* Scrolling Behavior */
+.terminal-body::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--terminal-bg);
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background-color: var(--terminal-scrollbar-thumb);
+    border-radius: 4px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--terminal-scrollbar-thumb-hover);
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .fake-terminal {
+        max-width: 95%;
+    }
+}
+
 
 /* Modal Content */
 .modal-content {
-    background: rgba(0, 0, 0, 0.35) !important; /* A bit darker background for better contrast */
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(8px) !important; /* Slight blur effect */
-    -webkit-backdrop-filter: blur(8px) !important;
-    box-shadow: 0 8px 50px rgba(0, 0, 0, 0.6) !important; /* Deeper shadow for focus */
-    color: #fff !important; /* Light text for dark theme */
-    border-radius: 12px; /* Round the corners of the modal */
+    background: var(--modal-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 50px rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 12px;
     transition: all 0.3s ease-in-out;
-}
-
-/* Modal Header */
-.modal-header {
-    background: rgba(0, 0, 0, 0.5) !important; /* Darker header */
-    padding: 15px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #f1f1f1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Light border for separation */
-    border-radius: 12px 12px 0 0; /* Rounded corners at the top */
-}
-
-.modal-header h5 {
-    margin: 0;
-}
-
-/* Window Controls */
-.window-controls {
-    display: flex;
-    align-items: center;
-}
-
-.window-btn {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    margin-left: 8px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
-    font-size: 14px;
-}
-
-/* Window Control Button Colors */
-.window-minimize {
-    background: linear-gradient(145deg, #f1c40f, #f39c12); /* Gradient for Minimize */
-    box-shadow: 0 0 5px rgba(241, 196, 15, 0.5);
-}
-
-.window-maximize {
-    background: linear-gradient(145deg, #2ecc71, #27ae60); /* Gradient for Maximize */
-    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
-}
-
-.window-close {
-    background: linear-gradient(145deg, #e74c3c, #c0392b); /* Gradient for Close */
-    box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
-}
-
-.window-btn:hover {
-    opacity: 0.9;
-    transform: scale(1.1); /* Slightly grow on hover */
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.1); /* Glow effect */
-}
-
-.window-btn:active {
-    transform: scale(0.95); /* Shrink slightly when clicked */
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); /* More intense shadow when clicked */
-}
-
-/* Modal Body */
-.modal-body {
-    padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-}
-
-.modal-body .small {
-    word-break: break-word;
-    font-size: 0.85rem;
-    color: #ddd;
 }
 
 /* File Item Styling */
@@ -367,31 +314,124 @@ body.bg-grey {
 
 .small {
     margin-top: 8px;
-    color: #ddd;
+    color: var(--file-item-text-color);
     font-size: 14px;
 }
 
-/* Default modal size (smaller size) */
-.modal-dialog {
-    max-width: 80%; /* Adjust the width as needed */
-    /* margin: 5% auto; */ /* Center the modal */
+/* Notepad Item Styling */
+.notepad-item {
+    background-color: var(--notepad-bg);
+    color: var(--notepad-text);
+    border: 1px solid var(--notepad-bg);
 }
 
-.modal-lg-custom {
-    width: 100% !important; /* Maximize to full width */
-    height: 100vh !important; /* Full screen height */
-    max-width: none !important;
-    margin: 0; /* Remove any margin */
-}
-
-
-/* Hover animation for AI LINKS cards */
-.ai-link-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.ai-link-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2);
+.notepad-item:hover {
+    background-color: var(--notepad-hover-bg);
     cursor: pointer;
+}
+
+/* Button Styling */
+.btn-outline-light {
+    border-color: var(--btn-border-color);
+    color: var(--btn-border-color);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--btn-hover-bg);
+    color: var(--notepad-bg);
+}
+
+/* Custom class for maximizing modals */
+.modal-lg-custom {
+    max-width: 100% !important;  /* Full width */
+    width: 100% !important;      /* Ensure it takes full width */
+    height: 100% !important;     /* Full height */
+    margin: 0;                   /* Remove margin */
+    top: 0;                      /* Align to the top of the screen */
+    left: 0;                     /* Align to the left of the screen */
+    right: 0;                    /* Align to the right */
+    bottom: 0;                   /* Align to the bottom */
+    border-radius: 0 !important; /* Remove rounded corners */
+}
+
+
+/* Window Controls Container */
+.window-controls {
+    display: flex;
+    gap: 12px; /* Increased space between buttons */
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Base Style for Buttons */
+.window-btn {
+    width: 22px; /* Increased size */
+    height: 22px; /* Increased size */
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Red Close Button */
+.window-close {
+    background-color: #ff3b30;
+    color: rgb(0, 0, 0);
+}
+
+.window-close:hover {
+    background-color: #d7321f;
+}
+
+.window-close:active {
+    transform: scale(0.9);
+}
+
+/* Yellow Minimize Button */
+.window-minimize {
+    background-color: #ffcc00;
+    color: rgb(0, 0, 0);
+}
+
+.window-minimize:hover {
+    background-color: #e6b800;
+}
+
+.window-minimize:active {
+    transform: scale(0.9);
+}
+
+/* Green Maximize Button */
+.window-maximize {
+    background-color: #4cd964;
+    color: rgb(0, 0, 0);
+}
+
+.window-maximize:hover {
+    background-color: #43b356;
+}
+
+.window-maximize:active {
+    transform: scale(0.9);
+}
+
+/* Icon Styles */
+.window-btn i {
+    font-size: 14px; /* Increased size for visibility */
+}
+
+/* Optional: Adding some spacing between buttons */
+.window-controls button + button {
+    margin-left: 5px;
+}
+
+/* Adding some additional hover effects for the macOS style */
+.window-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
