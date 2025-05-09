@@ -50,18 +50,22 @@
 <div class="fake-terminal">
     <div class="terminal-header">Terminal</div>
     <div class="terminal-body" id="terminalBody">
-        <p><span class="text-green">Welcome to the AI Desktop!</span></p>
-        <p><span class="text-grey">Type 'help' for available commands...</span></p>
+        <!-- This is where past commands will be rendered -->
+        <div id="terminalOutput">
+            <p><span class="text-green">Welcome to the AI Desktop!</span></p>
+            <p><span class="text-grey">Type 'help' for available commands...</span></p>
+        </div>
+
+        <!-- Persistent input line at bottom -->
         <div class="terminal-line">
             <span class="terminal-prompt">
-              <span class="text-red">user</span><span class="text-grey">@</span><span class="text-green">ubuntu</span><span class="text-grey">:~$</span>
+                <span class="text-red">user</span><span class="text-grey">@</span><span class="text-green">ubuntu</span><span class="text-grey">:~$</span>
             </span>
-            <input type="text" id="terminalInput" class="terminal-input" autofocus>
-          </div>
-          
-        
+            <input type="text" id="terminalInput" class="terminal-input" autofocus />
+        </div>
     </div>
 </div>
+
 
 
 
@@ -167,84 +171,67 @@
 
 <!-- AI LINKS Modal -->
 <div class="modal fade" id="aiLinksModal" tabindex="-1" aria-labelledby="aiLinksModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" id="aiLinksModalDialog">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0">
-                <h5 class="modal-title" id="aiLinksModalLabel">
-                    <i class="fas fa-link me-2 text-info"></i>AI LINKS
-                </h5>
-                <div class="window-controls">
-                    <button class="window-btn window-minimize" title="Minimize">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button class="window-btn window-maximize" title="Maximize" id="maximizeLinksBtn">
-                        <i class="fas fa-square"></i>
-                    </button>
-                    <button class="window-btn window-close" title="Close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="modal-body">
-                <!-- Categories -->
-                <div class="mb-3">
-                    <h5 class="text-primary">Chatbots</h5>
-                    <div class="row g-3">
-                        <!-- Example AI Links - Chatbots -->
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <a href="https://chat.openai.com" target="_blank" class="text-decoration-none">
-                                <div class="p-3 bg-dark text-light rounded shadow-sm h-100 ai-link-card">
-                                    <i class="fas fa-robot me-2"></i> ChatGPT
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <a href="https://bard.google.com" target="_blank" class="text-decoration-none">
-                                <div class="p-3 bg-dark text-light rounded shadow-sm h-100 ai-link-card">
-                                    <i class="fas fa-comments me-2"></i> Google Bard
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <h5 class="text-warning">Creative AI</h5>
-                    <div class="row g-3">
-                        <!-- Example AI Links - Creative AI -->
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <a href="https://www.midjourney.com" target="_blank" class="text-decoration-none">
-                                <div class="p-3 bg-dark text-light rounded shadow-sm h-100 ai-link-card">
-                                    <i class="fas fa-palette me-2"></i> MidJourney
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <h5 class="text-success">AI Music Tools</h5>
-                    <div class="row g-3">
-                        <!-- Example AI Links - AI Music Tools -->
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <a href="https://www.aiva.ai" target="_blank" class="text-decoration-none">
-                                <div class="p-3 bg-dark text-light rounded shadow-sm h-100 ai-link-card">
-                                    <i class="fas fa-music me-2"></i> Aiva
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Add more categories as needed -->
-
-            
-
-
-
-            </div>
+  <div class="modal-dialog modal-dialog-centered modal-xl" id="aiLinksModalDialog">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="aiLinksModalLabel">
+          <i class="fas fa-link me-2 text-info"></i>AI LINKS
+        </h5>
+        <div class="window-controls">
+          <button class="window-btn window-minimize" title="Minimize">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button class="window-btn window-maximize" title="Maximize" id="maximizeLinksBtn">
+            <i class="fas fa-square"></i>
+          </button>
+          <button class="window-btn window-close" title="Close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
+      </div>
+
+      <div class="modal-body">
+        <!-- Categories -->
+        <div class="mb-3">
+          <h5 class="text-primary">Chatbots</h5>
+          <div class="row g-3">
+            <div class="col-12 col-sm-6 col-md-4">
+              <a href="https://chat.openai.com" target="_blank" class="text-decoration-none text-light hover-underline d-inline-block">
+                <i class="fas fa-robot me-2"></i> ChatGPT
+              </a>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <a href="https://bard.google.com" target="_blank" class="text-decoration-none text-light hover-underline d-inline-block">
+                <i class="fas fa-comments me-2"></i> Google Bard
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h5 class="text-warning">Creative AI</h5>
+          <div class="row g-3">
+            <div class="col-12 col-sm-6 col-md-4">
+              <a href="https://www.midjourney.com" target="_blank" class="text-decoration-none text-light hover-underline d-inline-block">
+                <i class="fas fa-palette me-2"></i> MidJourney
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h5 class="text-success">AI Music Tools</h5>
+          <div class="row g-3">
+            <div class="col-12 col-sm-6 col-md-4">
+              <a href="https://www.aiva.ai" target="_blank" class="text-decoration-none text-light hover-underline d-inline-block">
+                <i class="fas fa-music me-2"></i> Aiva
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 

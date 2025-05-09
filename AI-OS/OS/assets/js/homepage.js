@@ -77,50 +77,111 @@ toggleModalMaximization('aiLinksModalDialog', 'maximizeLinksBtn');
 // Call the function for Notes Modal
 toggleModalMaximization('notesModalDialog', 'maximizeNotesBtn');
 
-// Terminal commands
+// Call the function for Notes viewer Modal
+toggleModalMaximization('notepadModalDialog', 'maximizeNotepadBtn');
+
 document.addEventListener('DOMContentLoaded', function () {
     const terminalInput = document.getElementById('terminalInput');
+    const terminalOutput = document.getElementById('terminalOutput');
     const terminalBody = document.getElementById('terminalBody');
+
+    const commands = [];
+
+    function renderTerminal() {
+        terminalOutput.innerHTML = `
+            <p><span class="text-green">Welcome to the AI Desktop!</span></p>
+            <p><span class="text-grey">Type 'help' for available commands...</span></p>
+        `;
+
+        commands.forEach(entry => {
+            const cmd = document.createElement('p');
+            cmd.innerHTML = `
+                <span class="terminal-prompt">
+                    <span class="text-red">user</span><span class="text-grey">@</span><span class="text-green">ubuntu</span><span class="text-grey">:~$</span>
+                </span> ${entry.command}
+            `;
+            terminalOutput.appendChild(cmd);
+
+            if (entry.response) {
+                const res = document.createElement('p');
+                res.innerHTML = `<span class='text-grey'>${entry.response}</span>`;
+                terminalOutput.appendChild(res);
+            }
+        });
+
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
 
     terminalInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             const command = terminalInput.value.trim();
-            if (command) {
-                // Echo the typed command with correct prompt
-                const newLine = document.createElement('p');
-                newLine.innerHTML = ` 
-                    <span class="terminal-prompt">
-                        <span class="text-red">user</span><span class="text-grey">@</span><span class="text-green">ubuntu</span><span class="text-grey">:~$</span>
-                    </span> ${command}
-                `;
-                terminalBody.insertBefore(newLine, terminalInput.parentElement);
+            if (!command) return;
 
-                // Fake response for some commands
-                const response = document.createElement('p');
-                if (command.toLowerCase() === 'help') {
-                    response.innerHTML = "<span class='text-grey'>Available commands: help, clear</span>";
-                } else if (command.toLowerCase() === 'clear') {
-                    // Clear only the content below the terminal prompt
-                    const content = terminalBody.querySelectorAll('p');
-                    content.forEach(p => {
-                        if (!p.contains(terminalInput)) {
-                            p.remove(); // Remove command output only, not the prompt
-                        }
-                    });
-                } else {
-                    response.innerHTML = `<span class='text-grey'>Command not recognized: ${command}</span>`;
-                }
+            let response = '';
 
-                if (command.toLowerCase() !== 'clear') {
-                    terminalBody.insertBefore(response, terminalInput.parentElement);
-                }
-
-                terminalInput.value = '';
-                terminalBody.scrollTop = terminalBody.scrollHeight; // Scroll to bottom
+            switch (command.toLowerCase()) {
+                case 'help':
+                    response = 'Available commands: help, clear';
+                    break;
+                case 'clear':
+                    commands.length = 0;
+                    renderTerminal();
+                    terminalInput.value = '';
+                    return;
+                case 'open notepad':
+                    const notesModal1 = new bootstrap.Modal(document.getElementById('notesModal'));
+                    notesModal1.show();
+                    response = 'Opening Notes...';
+                    break;    
+                case 'open note':
+                    const notesModal2 = new bootstrap.Modal(document.getElementById('notesModal'));
+                    notesModal2.show();
+                    response = 'Opening Notes...';
+                    break;
+                case 'open notes':
+                    const notesModal3 = new bootstrap.Modal(document.getElementById('notesModal'));
+                    notesModal3.show();
+                    response = 'Opening Notes...';
+                    break;
+                default:
+                    response = `Command not recognized: ${command}`;
             }
+
+            commands.push({ command, response });
+            renderTerminal();
+            terminalInput.value = '';
         }
     });
 });
+
+
+function renderTerminal() {
+    const output = document.getElementById('terminalOutput');
+    output.innerHTML = `
+        <p><span class="text-green">Welcome to the AI Desktop!</span></p>
+        <p><span class="text-grey">Type 'help' for available commands...</span></p>
+    `;
+
+    commands.forEach(entry => {
+        const cmd = document.createElement('p');
+        cmd.innerHTML = `
+            <span class="terminal-prompt">
+                <span class="text-red">user</span><span class="text-grey">@</span><span class="text-green">ubuntu</span><span class="text-grey">:~$</span>
+            </span> ${entry.command}
+        `;
+        output.appendChild(cmd);
+
+        if (entry.response) {
+            const res = document.createElement('p');
+            res.innerHTML = `<span class='text-grey'>${entry.response}</span>`;
+            output.appendChild(res);
+        }
+    });
+
+    const terminalBody = document.getElementById('terminalBody');
+    terminalBody.scrollTop = terminalBody.scrollHeight;
+}
+
 
 
 
