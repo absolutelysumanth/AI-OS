@@ -3,7 +3,7 @@ api response:
 ["test.txt","test1.txt"]
 
 
-POST http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/readNotepad.php?save_name=test.txt -> notepads display 
+notepad viewer part POST http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/readNotepad.php?save_name=test.txt -> notepads display 
 api response:
 {
 "id": 1,
@@ -13,7 +13,7 @@ api response:
 "modified_at": "2025-05-07 03:00:04"
 }
 
-POST http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/updateNotepad.php?save_name=test.txt
+update notepad POST http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/updateNotepad.php?save_name=test.txt
 {
 "id": 1,
 "save_name": "test.txt",

@@ -8,7 +8,6 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $notepads = [];
     while($row = $result->fetch_assoc()) {
-        $ids[] = $row['id'];
         $notepads[] = $row['save_name'];
     }
     echo json_encode($notepads); // Return the list as JSON

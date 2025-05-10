@@ -18,6 +18,7 @@ document.addEventListener('click', function (event) {
 });
 
 // Simulate opening an app or page when an item is clicked in the menu
+// Simulate opening an app or page when an item is clicked in the menu
 function openApp(appName) {
     if (appName === 'AI Folders') {
         const modal = new bootstrap.Modal(document.getElementById('aiFoldersModal'));
@@ -31,14 +32,20 @@ function openApp(appName) {
         var modal = new bootstrap.Modal(document.getElementById('notesModal'));
         modal.show();
     }
-     else if (appName === 'Recycle Bin') {
+    else if (appName === 'Recycle Bin') {
         alert('Recycle Bin opened');
     } else if (appName === 'Settings') {
         alert('Settings opened');
     } else if (appName === 'Power Off') {
         alert('Shutting down...');
+    } 
+    // Add the new Games modal logic
+    else if (appName === 'Games') {
+        const modal = new bootstrap.Modal(document.getElementById('gamesModal'));
+        modal.show();
     }
 }
+
 
 function toggleModalMaximization(modalId, buttonId) {
     const modalDialog = document.getElementById(modalId);
@@ -79,6 +86,9 @@ toggleModalMaximization('notesModalDialog', 'maximizeNotesBtn');
 
 // Call the function for Notes viewer Modal
 toggleModalMaximization('notepadModalDialog', 'maximizeNotepadBtn');
+
+// Call the function for Notes viewer Modal
+toggleModalMaximization('gamesModalDialog', 'maximizeGamesBtn');
 
 document.addEventListener('DOMContentLoaded', function () {
     const terminalInput = document.getElementById('terminalInput');
@@ -142,6 +152,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     const notesModal3 = new bootstrap.Modal(document.getElementById('notesModal'));
                     notesModal3.show();
                     response = 'Opening Notes...';
+                    break;
+                case 'open games':
+                    const gamesModal1 = new bootstrap.Modal(document.getElementById('gamesModal'));
+                    gamesModal1.show();
+                    response = 'Opening games...';
+                    break;
+                case 'open game':
+                    const gamesModal2 = new bootstrap.Modal(document.getElementById('gamesModal'));
+                    gamesModal2.show();
+                    response = 'Opening games...';
                     break;
                 default:
                     response = `Command not recognized: ${command}`;
@@ -243,25 +263,23 @@ function openNotepad(saveName) {
 }
 
 
+// Save note (POST to your PHP endpoint)
 function saveNote() {
-    const noteId = 1; // Replace with dynamic ID if needed
+    const saveName = $('#notepadTitle').text();
     const content = $('#notepadContent').val();
 
     $.ajax({
-        url: '/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/updateNotepad.php',
+        url: '/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/saveNotepad.php', // Adjust path
         method: 'POST',
-        data: { id: noteId, notes: content },
-        success: function (response) {
-            const res = JSON.parse(response);
-            alert(res.message);
+        data: { save_name: saveName, content: content },
+        success: function () {
+            alert('Note saved!');
         },
         error: function () {
             alert('Save failed.');
         }
     });
 }
-
-
 
 // Clear the note content
 function clearNote() {
@@ -270,3 +288,28 @@ function clearNote() {
 
 
 // notepad functionality end
+
+
+document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+
+    const contextMenu = document.getElementById('customContextMenu');
+
+    // Show only if right-clicking on background or desktop area
+    if (e.target === document.body || e.target.closest('.desktop-area')) {
+        contextMenu.style.display = 'block';
+        contextMenu.style.left = `${e.pageX}px`;
+        contextMenu.style.top = `${e.pageY}px`;
+    } else {
+        contextMenu.style.display = 'none';
+    }
+});
+
+document.addEventListener('click', function () {
+    document.getElementById('customContextMenu').style.display = 'none';
+});
+
+
+function hardReload() {
+    location.href = location.href.split('?')[0] + '?cacheBust=' + new Date().getTime();
+}

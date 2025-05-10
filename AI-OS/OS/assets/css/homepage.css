@@ -50,12 +50,21 @@ body.bg-grey {
     position: absolute;
     top: 50px;
     left: 20px;
+    display: grid;  /* Use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-gap: 20px; /* Space between icons */
+    max-height: calc(5 * 100px); /* Limit the height to display 5 rows */
+    overflow-y: auto; /* Allow scrolling if there are more than 5 rows */
+    padding-right: 10px; /* Add space for scrollbar */
 }
 
 .icon-item {
-    margin-bottom: 30px;
     color: var(--primary-color);
     font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
 }
 
 .desktop-icon {
@@ -68,6 +77,7 @@ body.bg-grey {
 .desktop-icon:hover {
     transform: scale(1.1);
 }
+
 
 /* Taskbar Styles */
 .taskbar {
@@ -470,3 +480,38 @@ body.bg-grey {
     transform: scaleX(1);
   }
   
+
+  .context-menu {
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    background: rgba(40, 40, 40, 0.95);
+    border: 1px solid #555;
+    border-radius: 8px;
+    min-width: 160px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+.context-menu li {
+    padding: 10px 16px;
+    color: #ddd;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.context-menu li i {
+    width: 18px;
+    text-align: center;
+}
+
+.context-menu li:hover {
+    background-color: #3a3a3a;
+    color: #fff;
+}
