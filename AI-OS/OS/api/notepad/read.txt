@@ -12,3 +12,12 @@ api response:
 "created_at": "2025-05-07 03:00:03",
 "modified_at": "2025-05-07 03:00:04"
 }
+
+POST http://localhost/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/updateNotepad.php?save_name=test.txt
+{
+"id": 1,
+"save_name": "test.txt",
+"notes": "test 1 file updated",
+"created_at": "2025-05-07 03:00:03",
+"modified_at": "2025-05-07 03:00:04"
+}

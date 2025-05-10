@@ -1,26 +1,37 @@
 <?php
 // Include database connection
-include('../../config/db_connection.php'); // Assuming the database connection is in this file
+include('../../config/db_connection.php');
 
-// Check if data is sent via PUT
-parse_str(file_get_contents("php://input"), $putData); // Get PUT data
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get ID from the URL
+    if (isset($_GET['id'])) {
+        $id = intval($_GET['id']);
 
-if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-    $id = $putData['id'];   // Note ID
-    $notes = $putData['notes'];  // Updated notes
+        // Get JSON body
+        $rawData = file_get_contents("php://input");
+        $data = json_decode($rawData, true);
 
-    // Prepare SQL to update the note
-    $sql = "UPDATE notepad SET notes = ?, modified_at = NOW() WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('si', $notes, $id);
-    $stmt->execute();
+        // Make sure notes field exists
+        if (isset($data['notes'])) {
+            $notes = $data['notes'];
 
-    if ($stmt->affected_rows > 0) {
-        echo json_encode(['message' => 'Note updated successfully']);
+            $sql = "UPDATE notepad SET notes = ?, modified_at = NOW() WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('si', $notes, $id);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                echo json_encode(['message' => 'Note updated successfully']);
+            } else {
+                echo json_encode(['message' => 'No changes made or note not found']);
+            }
+
+            $stmt->close();
+        } else {
+            echo json_encode(['message' => 'Missing "notes" field']);
+        }
     } else {
-        echo json_encode(['message' => 'Error updating note']);
+        echo json_encode(['message' => 'Missing ID in URL']);
     }
-
-    $stmt->close();
 }
 ?>

@@ -243,23 +243,25 @@ function openNotepad(saveName) {
 }
 
 
-// Save note (POST to your PHP endpoint)
 function saveNote() {
-    const saveName = $('#notepadTitle').text();
+    const noteId = 1; // Replace with dynamic ID if needed
     const content = $('#notepadContent').val();
 
     $.ajax({
-        url: '/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/saveNotepad.php', // Adjust path
+        url: '/OS-GITHUB/AI-OS/AI-OS/OS/api/notepad/updateNotepad.php',
         method: 'POST',
-        data: { save_name: saveName, content: content },
-        success: function () {
-            alert('Note saved!');
+        data: { id: noteId, notes: content },
+        success: function (response) {
+            const res = JSON.parse(response);
+            alert(res.message);
         },
         error: function () {
             alert('Save failed.');
         }
     });
 }
+
+
 
 // Clear the note content
 function clearNote() {
